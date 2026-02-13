@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ประวัติบ้านซับประดู่ - มรดกแห่งมวกเหล็ก</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4d3328;
+            --secondary: #b58a21;
+            --bg-cream: #fdfaf5;
+            --white: #ffffff;
+            --text-dark: #2d2d2d;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: 'Kanit', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- 1. แถบเมนูนำทาง (Glassmorphism) --- */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .navbar a { text-decoration: none; color: var(--primary); font-weight: 600; transition: 0.3s; }
+        .navbar a:hover { color: var(--secondary); }
+        .back-btn { background: var(--primary); color: white !important; padding: 8px 20px; border-radius: 20px; }
+
+        .nav-title {
+            position: absolute;      /* สั่งให้ลอยเป็นอิสระ */
+            left: 50%;               /* ดันไปที่กึ่งกลาง 50% ของหน้าจอ */
+            transform: translateX(-50%); /* ดึงกลับมาครึ่งหนึ่งของความกว้างตัวเอง เพื่อให้กลางพอดี */
+            
+            font-family: 'Kanit', sans-serif;
+            font-weight: 700;
+            
+            /* แนะนำ: เปลี่ยนเป็นสีน้ำตาลเข้ม (var(--primary)) จะอ่านง่ายกว่าสีขาวบนพื้นกระจกครับ */
+            color: var(--primary); 
+            /* color: white; <-- ถ้าอยากได้สีขาวเหมือนเดิม ให้เปิดบรรทัดนี้แทน */
+        }
+
+        /* --- 2. Hero Section (Parallax) --- */
+        .hero {
+            height: 75vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),  url('https://img2.pic.in.th/274d456e819723b3aeb0336428a1373d.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .hero-content h1 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        /* --- 3. เนื้อหาหลัก (Scroll Reveal) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: -60px auto 100px;
+            background: var(--white);
+            padding: 60px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            font-family: 'Kanit', sans-serif;
+            color: var(--primary);
+            border-left: 5px solid var(--secondary);
+            padding-left: 20px;
+            margin: 40px 0 20px;
+        }
+
+        /* --- 4. ตกแต่งรูปภาพ --- */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .image-gallery img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: 0.5s;
+        }
+        .image-gallery img:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        /* --- 5. Timeline Design --- */
+        .timeline-box {
+            background: var(--bg-cream);
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 30px;
+            border-right: 5px solid var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container { padding: 30px; margin-top: -30px; width: 95%; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .image-gallery { grid-template-columns: 1fr; }
+        }
+        /* ========================================= */
+    /* ส่วนเสริมสำหรับมือถือ (Mobile Responsive) */
+    /* ========================================= */
+    @media (max-width: 768px) {
+        
+        /* 1. ปรับ Navbar ให้พอดีจอ */
+        .navbar {
+            width: 95%;
+            padding: 10px 15px;
+            top: 10px;
+        }
+        .navbar a {
+            font-size: 14px; /* ลดขนาดตัวหนังสือ */
+        }
+
+        /* 2. ลดขนาดหัวข้อ Hero Section */
+        .hero-content h1 {
+            font-size: 2.5rem;
+        }
+
+        /* 3. ปรับกล่องเนื้อหาหลัก */
+        .main-container {
+            width: 90%;
+            padding: 30px 20px;
+            margin-top: -40px; /* ดึงขึ้นไปทับรูปน้อยลงหน่อย */
+        }
+
+        /* 4. รูปภาพเรียงเป็นแนวตั้ง (ทีละรูป) */
+        .image-gallery {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html"><i class="fa-solid fa-house"></i> หน้าแรก</a>
+        <span class="nav-title">ประวัติหมู่บ้าน</span>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>บ้านซับประดู่</h1>
+            <p>ตำนานและความภูมิใจของมวกเหล็ก</p>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <section class="reveal">
+            <h2 class="section-title">บทนำ</h2>
+            <p>หมู่บ้านซับประดู่ หมู่ที่ 6 ตั้งอยู่ในตำบลมวกเหล็ก จังหวัดสระบุรี เป็นชุมชนที่มีประวัติศาสตร์การก่อตั้งที่น่าสนใจ โดยมีลักษณะทางกายภาพที่โดดเด่นด้วยทรัพยากรธรรมชาติและวิถีชีวิตดั้งเดิมที่เรียบง่าย</p>
+        </section>
+
+        <div class="image-gallery reveal">
+            <img src="img/อ่างเก็บน้ำซับประดู่.jpg" alt="ใส่รูป 1">
+        </div>
+
+        <section class="reveal">
+            <h2 class="section-title">ประวัติการก่อตั้ง</h2>
+            <div class="timeline-box">
+                <p>บ้านซับประดู่เดิมเป็นพื้นที่ป่าอุดมสมบูรณ์ มีต้นประดู่ขึ้นอยู่หนาแน่นและมีแหล่งน้ำซับตลอดปี จึงเป็นที่มาของชื่อหมู่บ้าน เริ่มมีชาวบ้านอพยพเข้ามาตั้งรกรากเพื่อทำมาหากินในด้านกสิกรรมและเกษตรกรรม จนขยายตัวเป็นชุมชนในปัจจุบัน</p>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">วิถีชีวิตและวัฒนธรรม</h2>
+            <p>คนในชุมชนบ้านซับประดู่มีความผูกพันกันอย่างลึกซึ้ง มีความเอื้อเฟื้อเผื่อแผ่ และยังคงรักษาขนบธรรมเนียมประเพณีท้องถิ่นไว้อย่างดีงาม ทั้งงานบุญกลางบ้าน และการรวมกลุ่มกันเพื่อพัฒนาหมู่บ้าน</p>
+        </section>
+    </div>
+
+    <script>
+        // ฟังก์ชันตรวจจับการ Scroll เพื่อแสดงลูกเล่น Reveal
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+
+        // รันครั้งแรกเมื่อโหลดหน้าเว็บ
+        window.onload = reveal;
+    </script>
+</body>
+</html>
