@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,15 +100,22 @@
         /* ===== BANNER ===== */
         .banner-wrapper {
             width: 100%;
-            line-height: 0; /* กำจัดช่องว่างส่วนเกินใต้รูปภาพ */
+            line-height: 0;
+            /* กำจัดช่องว่างส่วนเกินใต้รูปภาพ */
         }
 
         .responsive-banner {
-            width: 100%;          /* กว้างเต็มจอเหมือนเดิม */
-            height: 450px;        /* [แก้ไข] กำหนดความสูงที่ต้องการ (แนะนำ 350px - 450px) */
-            object-fit: cover;    /* [สำคัญ] สั่งให้ตัดส่วนเกินของภาพออกเพื่อไม่ให้รูปบีบหรือยืดจนเบี้ยว */
-            object-position: center; /* จัดตำแหน่งภาพให้อยู่กึ่งกลางเสมอ */   /* [สำคัญ] สั่งให้ความสูงปรับอัตโนมัติตามสัดส่วนรูปเดิม (รูปจะไม่โดนตัด) */
-            display: block; /* แสดงผลเป็นบล็อก */
+            width: 100%;
+            /* กว้างเต็มจอเหมือนเดิม */
+            height: 450px;
+            /* [แก้ไข] กำหนดความสูงที่ต้องการ (แนะนำ 350px - 450px) */
+            object-fit: cover;
+            /* [สำคัญ] สั่งให้ตัดส่วนเกินของภาพออกเพื่อไม่ให้รูปบีบหรือยืดจนเบี้ยว */
+            object-position: center;
+            /* จัดตำแหน่งภาพให้อยู่กึ่งกลางเสมอ */
+            /* [สำคัญ] สั่งให้ความสูงปรับอัตโนมัติตามสัดส่วนรูปเดิม (รูปจะไม่โดนตัด) */
+            display: block;
+            /* แสดงผลเป็นบล็อก */
         }
 
         /* ===== PROJECT SECTION ===== */
@@ -273,11 +279,17 @@
         }
 
         .about-image img {
-            width: 350px; 
+
+            width: 350px;
+
+            /* ป้องกันรูปใหญ่เกินหน้าจอมือถือ */
             max-width: 100%;
+
             height: auto;
             border-radius: 5px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+            /* [เพิ่ม] จัดรูปให้อยู่กึ่งกลางของกล่อง */
             display: block;
             margin: 0 auto;
         }
@@ -410,55 +422,54 @@
             }
 
             @media (max-width: 600px) {
-            .responsive-banner {
-                height: auto; /* ในมือถือให้ความสูงปรับตามธรรมชาติ รูปจะได้เห็นครบ */
-            }
-        }
-
-        /* ========================================= */
-        /* ส่วนเสริมสำหรับมือถือ (Mobile Responsive) */
-        /* ========================================= */
-        @media (max-width: 768px) {
-
-            /* 1. ปรับเมนูให้เลื่อนแนวนอนได้ ไม่ล้นจอ */
-            .menu-bar {
-                justify-content: flex-start;
-                overflow-x: auto;
-                white-space: nowrap;
-                padding: 5px 10px;
-                -webkit-overflow-scrolling: touch;
+                .responsive-banner {
+                    height: auto;
+                    /* ในมือถือให้ความสูงปรับตามธรรมชาติ รูปจะได้เห็นครบ */
+                }
             }
 
-            .menu-bar a {
-                margin-right: 20px;
-                background: rgba(255, 255, 255, 0.1);
-                padding: 5px 15px;
-                border-radius: 20px;
-            }
+            /* ========================================= */
+            /* ส่วนเสริมสำหรับมือถือ (Mobile Responsive) */
+            /* ========================================= */
+            @media (max-width: 768px) {
+                .menu-bar {
+                    justify-content: flex-start;
+                    overflow-x: auto;
+                    white-space: nowrap;
+                    padding: 6px 10px;
+                }
 
-            /* 3. เรียงเนื้อหาเป็นแนวตั้ง (Stack) */
-            .about-content {
-                flex-direction: column;
-                /* รูปกับข้อความเรียงลงมา */
-                gap: 30px;
-                text-align: center;
-            }
+                .menu-bar a {
+                    margin-right: 20px;
+                    background: rgba(255, 255, 255, 0.1);
+                    padding: 5px 15px;
+                    border-radius: 20px;
+                }
 
-            .about-text h2::after {
-                margin: 10px auto;
-                /* จัดเส้นขีดให้กลาง */
-            }
+                /* 3. เรียงเนื้อหาเป็นแนวตั้ง (Stack) */
+                .about-content {
+                    flex-direction: column;
+                    /* รูปกับข้อความเรียงลงมา */
+                    gap: 30px;
+                    text-align: center;
+                }
 
-            /* 4. สถิติเรียงลงมา */
-            .stats-row {
-                flex-direction: column;
-                gap: 30px;
-                text-align: center;
-            }
+                .about-text h2::after {
+                    margin: 10px auto;
+                    /* จัดเส้นขีดให้กลาง */
+                }
 
-            /* 5. ปรับส่วนข่าว */
-            .project-section {
-                padding: 40px 20px;
+                /* 4. สถิติเรียงลงมา */
+                .stats-row {
+                    flex-direction: column;
+                    gap: 30px;
+                    text-align: center;
+                }
+
+                /* 5. ปรับส่วนข่าว */
+                .project-section {
+                    padding: 40px 20px;
+                }
             }
         }
     </style>
@@ -469,7 +480,7 @@
 
         <div class="topbar">
             <div class="logo">
-                <img src="logo/logo.png" alt="Logo">
+                <img src="logo/banner.png" alt="Logo">
                 หมู่บ้านซับประดู่
             </div>
         </div>
@@ -494,7 +505,7 @@
         </div>
 
         <div class="project-slider" id="home-news-slider">
-            <p style="padding: 20px; color: #000000;">กำลังโหลดข่าวล่าสุด...</p>
+            <p style="padding: 20px; color: #000000;">กำลังโหลดข่าวล่าสุด.....</p>
         </div>
     </section>
 
@@ -601,10 +612,28 @@
         // ============================================
         async function countVisits() {
             try {
-                // URL ที่ถูกต้องของ CounterAPI
-                const response = await fetch("https://api.counterapi.dev/v1/subpradu-village/homepage/up");
-                const data = await response.json();
+                // 1. เช็คว่าคนนี้เคยเข้ามาหรือยัง?
+                // เราจะเช็คจาก "ตราประทับ" ที่เราฝากไว้ในเครื่องเขา
+                const STORAGE_KEY = 'visited_subpradu_homepage';
+                const hasVisited = localStorage.getItem(STORAGE_KEY);
 
+                let response;
+
+                if (!hasVisited) {
+                    // === กรณี: ยังไม่เคยเข้า ===
+                    // 1. สั่งให้นับเพิ่ม (+1)
+                    response = await fetch("https://api.counterapi.dev/v1/visited_subpradu_homepage/homepage/up");
+                    
+                    // 2. ฝากตราประทับไว้ในเครื่องเขา ว่า "นับไปแล้วนะ"
+                    localStorage.setItem(STORAGE_KEY, 'true');
+                } else {
+                    // === กรณี: เคยเข้าแล้ว (กด Refresh) ===
+                    // 1. สั่งให้อ่านตัวเลขเฉยๆ (ไม่เอา /up)
+                    response = await fetch("https://api.counterapi.dev/v1/visited_subpradu_homepage/homepage/");
+                }
+
+                // เอาตัวเลขมาแสดงผล
+                const data = await response.json();
                 const counterElement = document.getElementById("website-visits");
                 if (counterElement) {
                     counterElement.innerText = data.count.toLocaleString();
@@ -614,7 +643,6 @@
                 console.error("นับยอดวิวไม่สำเร็จ:", error);
             }
         }
-
         // เรียกใช้งานตอนโหลดหน้าเว็บ
         window.onload = function () {
             if (typeof fetchHomeNews === 'function') fetchHomeNews();
@@ -622,5 +650,4 @@
         };
     </script>
 </body>
-
 </html>
