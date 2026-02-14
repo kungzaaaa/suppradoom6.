@@ -53,7 +53,6 @@
             width: auto;
             object-fit: contain;
             transition: height 0.3s;
-            /* เพิ่ม transition ให้ย่อขยายลื่นๆ */
         }
 
         /* ===== MENU BAR ===== */
@@ -106,8 +105,10 @@
         }
 
         .responsive-banner {
-            width: 100%;    /* สั่งให้รูปกว้างเต็มจอเสมอ */
-            height: auto;   /* [สำคัญ] สั่งให้ความสูงปรับอัตโนมัติตามสัดส่วนรูปเดิม (รูปจะไม่โดนตัด) */
+            width: 100%;          /* กว้างเต็มจอเหมือนเดิม */
+            height: 450px;        /* [แก้ไข] กำหนดความสูงที่ต้องการ (แนะนำ 350px - 450px) */
+            object-fit: cover;    /* [สำคัญ] สั่งให้ตัดส่วนเกินของภาพออกเพื่อไม่ให้รูปบีบหรือยืดจนเบี้ยว */
+            object-position: center; /* จัดตำแหน่งภาพให้อยู่กึ่งกลางเสมอ */   /* [สำคัญ] สั่งให้ความสูงปรับอัตโนมัติตามสัดส่วนรูปเดิม (รูปจะไม่โดนตัด) */
             display: block; /* แสดงผลเป็นบล็อก */
         }
 
@@ -272,10 +273,13 @@
         }
 
         .about-image img {
-            width: 100%;
+            width: 350px; 
+            max-width: 100%;
             height: auto;
             border-radius: 5px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: block;
+            margin: 0 auto;
         }
 
         /* Stats */
@@ -403,6 +407,11 @@
 
             .about-text {
                 text-align: center;
+            }
+
+            @media (max-width: 600px) {
+            .responsive-banner {
+                height: auto; /* ในมือถือให้ความสูงปรับตามธรรมชาติ รูปจะได้เห็นครบ */
             }
         }
 
