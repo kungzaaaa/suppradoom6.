@@ -472,6 +472,99 @@
                 }
             }
         }
+
+        /* ========================================= */
+        /* [ส่วนที่เพิ่มใหม่] CSS สำหรับ Footer แผนที่และช่องทางติดต่อ */
+        /* ========================================= */
+        
+        /* กล่องคลุม Footer หลัก */
+        .main-footer {
+            background-color: #fcfaf8; /* สีพื้นหลังครีมอ่อนๆ ให้ดูสบายตาและแยกสัดส่วนชัดเจน */
+            padding: 40px 20px;        /* ระยะห่างขอบ บน-ล่าง 40px, ซ้าย-ขวา 20px */
+            border-top: 1px solid #eaeaea; /* เส้นคั่นบางๆ ด้านบน */
+        }
+
+        /* กล่องจัดระเบียบเนื้อหาด้านในให้อยู่ตรงกลาง */
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* แบ่งเป็น 2 ฝั่ง ซ้าย-ขวา ขนาดเท่าๆ กัน */
+            gap: 40px; /* ช่องว่างระหว่างแผนที่กับข้อมูลติดต่อ */
+        }
+
+        /* หัวข้อใน Footer */
+        .footer-heading {
+            font-size: 18px;
+            color: #4d3328; /* สีน้ำตาลเข้มตามธีมเว็บ */
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* สไตล์สำหรับกล่องแผนที่ */
+        .footer-map iframe {
+            width: 100%;
+            height: 220px; /* กำหนดความสูงแผนที่ไม่ให้ใหญ่เกินไป */
+            border-radius: 8px; /* ทำมุมแผนที่ให้โค้งมนดูละมุนขึ้น */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* เงาเบาๆ */
+        }
+
+        /* สไตล์สำหรับรายการข้อมูลติดต่อ */
+        .contact-list {
+            list-style: none; /* เอาจุดไข่ปลาหน้าข้อความออก */
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-list li {
+            font-size: 15px;
+            color: #555; /* สีเทาเข้ม อ่านง่ายสบายตา */
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px; /* ระยะห่างระหว่างไอคอนกับตัวหนังสือ */
+        }
+
+        .contact-list i {
+            color: #b58a21; /* สีทอง/น้ำตาลอ่อน เข้ากับธีม */
+            margin-top: 4px; /* ดันไอคอนลงมานิดหน่อยให้ตรงกับบรรทัดแรกของข้อความ */
+        }
+
+        /* สไตล์สำหรับกลุ่มปุ่ม Social Media */
+        .social-icons {
+            display: flex;
+            gap: 15px; /* ระยะห่างระหว่างปุ่ม */
+        }
+
+        /* สไตล์ปุ่ม Social แต่ละปุ่ม */
+        .social-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;  /* ขนาดปุ่ม กว้าง */
+            height: 40px; /* ขนาดปุ่ม สูง */
+            background-color: #ffffff;
+            color: #4d3328;
+            border-radius: 50%; /* สั่งให้เป็นวงกลม */
+            text-decoration: none;
+            font-size: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease; /* ทำให้เวลาเอาเมาส์ชี้แล้วนุ่มนวลขึ้น */
+        }
+
+        /* ลูกเล่นเวลาเอาเมาส์ชี้ (Hover) จะเปลี่ยนสีตามแบรนด์ */
+        .social-btn.facebook:hover { background-color: #1877F2; color: #ffffff; }
+        .social-btn.line:hover { background-color: #06C755; color: #ffffff; }
+        .social-btn.youtube:hover { background-color: #FF0000; color: #ffffff; }
+
+        /* --- Responsive ปรับแต่งสำหรับหน้าจอมือถือ --- */
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr; /* เมื่อจอมือถือ ให้หดเหลือ 1 คอลัมน์ (เรียงบนลงล่าง) */
+                gap: 30px;
+            }
+        }
     </style>
 </head>
 
@@ -493,14 +586,14 @@
     </div>
 
     <section class="banner-wrapper">
-        <img src="logo/banner.png" alt="ป้ายแบนเนอร์โครงการ" class="responsive-banner">
+        <img src="logo/banner.png" alt="ป้ายแบนเนอร์" class="responsive-banner">
     </section>
 
     <section class="project-section">
         <div class="project-info">
-            <h2>ข่าวรายวัน<br>ในหมู่บ้านซับประดู่</h2>
+            <h2>กิจกรรม<br>ในหมู่บ้านซับประดู่</h2>
             <div class="line"></div>
-            <p>ดูข่าวรายวันเพิ่มเติม</p>
+            <p>ภาพกิจกรรมเพิ่มเติม</p>
             <a href="news.html"><button class="view-btn">เพิ่มเติม</button></a>
         </div>
 
@@ -543,6 +636,39 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" alt="LINE Logo"
             style="width: 35px; height: auto;">
     </a>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            
+            <div class="footer-map">
+                <h3 class="footer-heading"><i class="fa-solid fa-map-location-dot"></i> แผนที่หมู่บ้าน</h3>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5233.075800093523!2d101.14846794768505!3d14.683516114448876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311dd9ee87b39e8f%3A0x7786f394e1bf5a8c!2z4Lin4Lix4LiU4LiL4Lix4Lia4Lib4Lij4Liw4LiU4Li54LmI!5e1!3m2!1sth!2sth!4v1771738293559!5m2!1sth!2sth" 
+                    style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <div class="footer-contact">
+                <h3 class="footer-heading"><i class="fa-solid fa-address-book"></i> ช่องทางการติดต่อ</h3>
+                <ul class="contact-list">
+                    <li><i class="fa-solid fa-location-dot"></i>หมู่บ้านซับประดู่ หมู่ที่ 6 ตำบลมวกเหล็ก อำเภอมวกเหล็ก จังหวัดสระบุรี 18180
+                    Suppradoo, moo6, muaklek district, muaklek, saraburi 18180, Thailand</li>
+                    <li><i class="fa-solid fa-phone"></i> 08X-XXX-XXXX (ผู้ใหญ่บ้าน)</li> 
+                    <li><i class="fa-solid fa-envelope"></i> Suppradoom6@gmail.com</li>
+                </ul>
+                
+                <h3 class="footer-heading" style="margin-top: 25px;"><i class="fa-solid fa-share-nodes"></i> ติดตามข่าวสาร</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-btn facebook" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    
+                    <a href="https://lin.ee/b25G2mb" target="_blank" class="social-btn line" title="LINE Official"><i class="fa-brands fa-line"></i></a>
+                    
+                    <a href="#" class="social-btn youtube" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
 
     <div class="site-footer">
         Copyright © ซับประดู่ | All Rights Reserved
