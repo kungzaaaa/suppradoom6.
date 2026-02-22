@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +33,19 @@
             align-items: center;
             color: rgb(0, 0, 0);
             padding: 10px 0;
-            /* เพิ่ม padding เล็กน้อย */
+            position: relative;
+            /* เพิ่มบรรทัดนี้ */
+        }
+
+        .hamburger-menu {
+            display: none;
+            font-size: 26px;
+            color: #4d3328;
+            cursor: pointer;
+            position: absolute;
+            right: 25px;
+            /* ให้อยู่ชิดขวาเสมอ */
+            padding: 5px;
         }
 
         .logo {
@@ -54,47 +67,46 @@
             transition: height 0.3s;
         }
 
-        /* ===== MENU BAR ===== */
+        /* ===== MENU BAR (UX/UI Upgrade) ===== */
         .menu-bar {
             background: #5e3b2c;
             display: flex;
             justify-content: center;
-            gap: 30px;
-            padding: 12px 0;
+            gap: 10px;
+            /* ลดช่องว่างลง เพราะเราจะไปเพิ่มความกว้างที่ตัวปุ่มแทน */
+            padding: 12px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            /* เพิ่มเงาด้านล่างให้เมนูลอยเด่นขึ้นจากเนื้อหา */
         }
 
         .menu-bar a {
             text-decoration: none;
-            color: rgb(255, 255, 255);
+            color: rgba(255, 255, 255, 0.85);
+            /* ดรอปสีขาวลงนิดนึง เพื่อให้มีมิติเวลาเอาเมาส์ชี้ */
             font-size: 15px;
-            font-weight: 400;
-            transition: 0.3s;
-            position: relative;
+            font-weight: 500;
+            padding: 8px 20px;
+            /* [สำคัญ] เพิ่มพื้นที่รอบตัวอักษรให้กดง่ายขึ้น (Fitts's Law) */
+            border-radius: 30px;
+            /* ทำขอบให้มนกลมเป็นรูปแคปซูล */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* ระยะห่างระหว่างไอคอนกับตัวหนังสือ */
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* ทำให้แอนิเมชันเด้งแบบนุ่มนวล */
         }
 
-        .menu-bar a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: white;
-            transition: 0.3s;
-        }
-
-        .menu-bar a:hover::after {
-            width: 100%;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+        /* ลูกเล่นเวลาเอาเมาส์ชี้ (Hover Effect) */
+        .menu-bar a:hover {
+            color: #ffffff;
+            /* ตัวหนังสือสว่างวาบขึ้น */
+            background-color: rgba(255, 255, 255, 0.15);
+            /* มีพื้นหลังกระจกใสๆ โผล่มา */
+            transform: translateY(-3px);
+            /* สั่งให้ปุ่มกระโดดลอยขึ้นเบาๆ */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            /* เพิ่มเงาให้ปุ่มที่ลอยขึ้น */
         }
 
         /* ===== BANNER ===== */
@@ -432,41 +444,74 @@
             /* ส่วนเสริมสำหรับมือถือ (Mobile Responsive) */
             /* ========================================= */
             @media (max-width: 768px) {
+
+                /* แสดงปุ่ม 3 ขีดบนมือถือ */
+                .hamburger-menu {
+                    display: block;
+                }
+
+                /* เปลี่ยนเมนูบาร์เป็น Dropdown แนวตั้ง */
                 .menu-bar {
-                    justify-content: flex-start;
-                    overflow-x: auto;
-                    white-space: nowrap;
-                    padding: 6px 10px;
+                    position: absolute;
+                    top: 100%;
+                    /* ให้อยู่ใต้ header พอดี */
+                    left: 0;
+                    width: 100%;
+                    flex-direction: column;
+                    /* เรียงปุ่มจากบนลงล่าง */
+                    background: #4d3328;
+                    /* เปลี่ยนสีให้เข้มขึ้นเพื่อให้กลมกลืนกับ Header */
+                    padding: 0;
+
+                    /* สร้างแอนิเมชันเปิด/ปิดเมนู */
+                    max-height: 0;
+                    overflow: hidden;
+                    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+                    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
                 }
 
+                /* คลาสเมื่อกดปุ่มให้เมนูโชว์ออกมา */
+                .menu-bar.active {
+                    max-height: 300px;
+                    /* ขยายความสูงให้เนื้อหาโชว์ */
+                    padding: 15px 0;
+                }
+
+                /* ปรับแต่งปุ่มลิงก์ด้านในเมนู */
                 .menu-bar a {
-                    margin-right: 20px;
-                    background: rgba(255, 255, 255, 0.1);
-                    padding: 5px 15px;
-                    border-radius: 20px;
+                    margin: 5px 20px;
+                    /* ขอบซ้ายขวา */
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    /* เปลี่ยนจากแคปซูลเป็นสี่เหลี่ยมมนๆ */
+                    justify-content: flex-start;
+                    /* ให้ไอคอนและข้อความชิดซ้ายอ่านง่าย */
+                    background: transparent;
                 }
 
-                /* 3. เรียงเนื้อหาเป็นแนวตั้ง (Stack) */
+                .menu-bar a:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: translateX(5px);
+                    /* เวลาชี้เมาส์ให้ปุ่มขยับไปทางขวานิดนึง (สไตล์ลิสต์) */
+                }
+
+                /* --- ส่วนอื่นๆ คงเดิม --- */
                 .about-content {
                     flex-direction: column;
-                    /* รูปกับข้อความเรียงลงมา */
                     gap: 30px;
                     text-align: center;
                 }
 
                 .about-text h2::after {
                     margin: 10px auto;
-                    /* จัดเส้นขีดให้กลาง */
                 }
 
-                /* 4. สถิติเรียงลงมา */
                 .stats-row {
                     flex-direction: column;
                     gap: 30px;
                     text-align: center;
                 }
 
-                /* 5. ปรับส่วนข่าว */
                 .project-section {
                     padding: 40px 20px;
                 }
@@ -476,12 +521,15 @@
         /* ========================================= */
         /* [ส่วนที่เพิ่มใหม่] CSS สำหรับ Footer แผนที่และช่องทางติดต่อ */
         /* ========================================= */
-        
+
         /* กล่องคลุม Footer หลัก */
         .main-footer {
-            background-color: #fcfaf8; /* สีพื้นหลังครีมอ่อนๆ ให้ดูสบายตาและแยกสัดส่วนชัดเจน */
-            padding: 40px 20px;        /* ระยะห่างขอบ บน-ล่าง 40px, ซ้าย-ขวา 20px */
-            border-top: 1px solid #eaeaea; /* เส้นคั่นบางๆ ด้านบน */
+            background-color: #fcfaf8;
+            /* สีพื้นหลังครีมอ่อนๆ ให้ดูสบายตาและแยกสัดส่วนชัดเจน */
+            padding: 40px 20px;
+            /* ระยะห่างขอบ บน-ล่าง 40px, ซ้าย-ขวา 20px */
+            border-top: 1px solid #eaeaea;
+            /* เส้นคั่นบางๆ ด้านบน */
         }
 
         /* กล่องจัดระเบียบเนื้อหาด้านในให้อยู่ตรงกลาง */
@@ -489,14 +537,17 @@
             max-width: 1100px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr; /* แบ่งเป็น 2 ฝั่ง ซ้าย-ขวา ขนาดเท่าๆ กัน */
-            gap: 40px; /* ช่องว่างระหว่างแผนที่กับข้อมูลติดต่อ */
+            grid-template-columns: 1fr 1fr;
+            /* แบ่งเป็น 2 ฝั่ง ซ้าย-ขวา ขนาดเท่าๆ กัน */
+            gap: 40px;
+            /* ช่องว่างระหว่างแผนที่กับข้อมูลติดต่อ */
         }
 
         /* หัวข้อใน Footer */
         .footer-heading {
             font-size: 18px;
-            color: #4d3328; /* สีน้ำตาลเข้มตามธีมเว็บ */
+            color: #4d3328;
+            /* สีน้ำตาลเข้มตามธีมเว็บ */
             margin-top: 0;
             margin-bottom: 15px;
             font-weight: 600;
@@ -505,36 +556,45 @@
         /* สไตล์สำหรับกล่องแผนที่ */
         .footer-map iframe {
             width: 100%;
-            height: 220px; /* กำหนดความสูงแผนที่ไม่ให้ใหญ่เกินไป */
-            border-radius: 8px; /* ทำมุมแผนที่ให้โค้งมนดูละมุนขึ้น */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* เงาเบาๆ */
+            height: 220px;
+            /* กำหนดความสูงแผนที่ไม่ให้ใหญ่เกินไป */
+            border-radius: 8px;
+            /* ทำมุมแผนที่ให้โค้งมนดูละมุนขึ้น */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            /* เงาเบาๆ */
         }
 
         /* สไตล์สำหรับรายการข้อมูลติดต่อ */
         .contact-list {
-            list-style: none; /* เอาจุดไข่ปลาหน้าข้อความออก */
+            list-style: none;
+            /* เอาจุดไข่ปลาหน้าข้อความออก */
             padding: 0;
             margin: 0;
         }
 
         .contact-list li {
             font-size: 15px;
-            color: #555; /* สีเทาเข้ม อ่านง่ายสบายตา */
+            color: #555;
+            /* สีเทาเข้ม อ่านง่ายสบายตา */
             margin-bottom: 12px;
             display: flex;
             align-items: flex-start;
-            gap: 10px; /* ระยะห่างระหว่างไอคอนกับตัวหนังสือ */
+            gap: 10px;
+            /* ระยะห่างระหว่างไอคอนกับตัวหนังสือ */
         }
 
         .contact-list i {
-            color: #b58a21; /* สีทอง/น้ำตาลอ่อน เข้ากับธีม */
-            margin-top: 4px; /* ดันไอคอนลงมานิดหน่อยให้ตรงกับบรรทัดแรกของข้อความ */
+            color: #b58a21;
+            /* สีทอง/น้ำตาลอ่อน เข้ากับธีม */
+            margin-top: 4px;
+            /* ดันไอคอนลงมานิดหน่อยให้ตรงกับบรรทัดแรกของข้อความ */
         }
 
         /* สไตล์สำหรับกลุ่มปุ่ม Social Media */
         .social-icons {
             display: flex;
-            gap: 15px; /* ระยะห่างระหว่างปุ่ม */
+            gap: 15px;
+            /* ระยะห่างระหว่างปุ่ม */
         }
 
         /* สไตล์ปุ่ม Social แต่ละปุ่ม */
@@ -542,26 +602,42 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 40px;  /* ขนาดปุ่ม กว้าง */
-            height: 40px; /* ขนาดปุ่ม สูง */
+            width: 40px;
+            /* ขนาดปุ่ม กว้าง */
+            height: 40px;
+            /* ขนาดปุ่ม สูง */
             background-color: #ffffff;
             color: #4d3328;
-            border-radius: 50%; /* สั่งให้เป็นวงกลม */
+            border-radius: 50%;
+            /* สั่งให้เป็นวงกลม */
             text-decoration: none;
             font-size: 18px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease; /* ทำให้เวลาเอาเมาส์ชี้แล้วนุ่มนวลขึ้น */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            /* ทำให้เวลาเอาเมาส์ชี้แล้วนุ่มนวลขึ้น */
         }
 
         /* ลูกเล่นเวลาเอาเมาส์ชี้ (Hover) จะเปลี่ยนสีตามแบรนด์ */
-        .social-btn.facebook:hover { background-color: #1877F2; color: #ffffff; }
-        .social-btn.line:hover { background-color: #06C755; color: #ffffff; }
-        .social-btn.youtube:hover { background-color: #FF0000; color: #ffffff; }
+        .social-btn.facebook:hover {
+            background-color: #1877F2;
+            color: #ffffff;
+        }
+
+        .social-btn.line:hover {
+            background-color: #06C755;
+            color: #ffffff;
+        }
+
+        .social-btn.youtube:hover {
+            background-color: #FF0000;
+            color: #ffffff;
+        }
 
         /* --- Responsive ปรับแต่งสำหรับหน้าจอมือถือ --- */
         @media (max-width: 768px) {
             .footer-container {
-                grid-template-columns: 1fr; /* เมื่อจอมือถือ ให้หดเหลือ 1 คอลัมน์ (เรียงบนลงล่าง) */
+                grid-template-columns: 1fr;
+                /* เมื่อจอมือถือ ให้หดเหลือ 1 คอลัมน์ (เรียงบนลงล่าง) */
                 gap: 30px;
             }
         }
@@ -573,15 +649,19 @@
 
         <div class="topbar">
             <div class="logo">
-                <img src="logo/logo.png" alt="Logo">
+                <img src="logo/logo.png" alt="โลโก้หมู่บ้านซับประดู่">
                 หมู่บ้านซับประดู่
+            </div>
+
+            <div class="hamburger-menu" id="hamburger-icon">
+                <i class="fa-solid fa-bars"></i>
             </div>
         </div>
 
         <div class="menu-bar">
-            <a href="news.html">ข่าวประจำวัน</a>
-            <a href="History.html">ประวัติบ้านซับประดู่</a>
-            <a href="https://lin.ee/b25G2mb">แจ้งปัญหา</a>
+            <a href="news.html"><i class="fa-regular fa-newspaper"></i> ข่าวประจำวัน</a>
+            <a href="History.html"><i class="fa-solid fa-clock-rotate-left"></i> ประวัติบ้านซับประดู่</a>
+            <a href="https://lin.ee/b25G2mb"><i class="fa-solid fa-headset"></i> ติดต่อเรา</a>
         </div>
     </div>
 
@@ -639,11 +719,11 @@
 
     <footer class="main-footer">
         <div class="footer-container">
-            
+
             <div class="footer-map">
                 <h3 class="footer-heading"><i class="fa-solid fa-map-location-dot"></i> แผนที่หมู่บ้าน</h3>
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5233.075800093523!2d101.14846794768505!3d14.683516114448876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311dd9ee87b39e8f%3A0x7786f394e1bf5a8c!2z4Lin4Lix4LiU4LiL4Lix4Lia4Lib4Lij4Liw4LiU4Li54LmI!5e1!3m2!1sth!2sth!4v1771738293559!5m2!1sth!2sth" 
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5233.075800093523!2d101.14846794768505!3d14.683516114448876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311dd9ee87b39e8f%3A0x7786f394e1bf5a8c!2z4Lin4Lix4LiU4LiL4Lix4Lia4Lib4Lij4Liw4LiU4Li54LmI!5e1!3m2!1sth!2sth!4v1771738293559!5m2!1sth!2sth"
                     style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
@@ -651,18 +731,21 @@
             <div class="footer-contact">
                 <h3 class="footer-heading"><i class="fa-solid fa-address-book"></i> ช่องทางการติดต่อ</h3>
                 <ul class="contact-list">
-                    <li><i class="fa-solid fa-location-dot"></i>หมู่บ้านซับประดู่ หมู่ที่ 6 ตำบลมวกเหล็ก อำเภอมวกเหล็ก จังหวัดสระบุรี 18180
-                    Suppradoo, moo6, muaklek district, muaklek, saraburi 18180, Thailand</li>
-                    <li><i class="fa-solid fa-phone"></i> 08X-XXX-XXXX (ผู้ใหญ่บ้าน)</li> 
+                    <li><i class="fa-solid fa-location-dot"></i>หมู่บ้านซับประดู่ หมู่ที่ 6 ตำบลมวกเหล็ก อำเภอมวกเหล็ก
+                        จังหวัดสระบุรี 18180
+                        Suppradoo, moo6, muaklek district, muaklek, saraburi 18180, Thailand</li>
+                    <li><i class="fa-solid fa-phone"></i> 08X-XXX-XXXX (ผู้ใหญ่บ้าน)</li>
                     <li><i class="fa-solid fa-envelope"></i> Suppradoom6@gmail.com</li>
                 </ul>
-                
-                <h3 class="footer-heading" style="margin-top: 25px;"><i class="fa-solid fa-share-nodes"></i> ติดตามข่าวสาร</h3>
+
+                <h3 class="footer-heading" style="margin-top: 25px;"><i class="fa-solid fa-share-nodes"></i>
+                    ติดตามข่าวสารหรือติดต่อเราได้ที่</h3>
                 <div class="social-icons">
                     <a href="#" class="social-btn facebook" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    
-                    <a href="https://lin.ee/b25G2mb" target="_blank" class="social-btn line" title="LINE Official"><i class="fa-brands fa-line"></i></a>
-                    
+
+                    <a href="https://lin.ee/pGFhtc3M" target="_blank" class="social-btn line" title="LINE Official"><i
+                            class="fa-brands fa-line"></i></a>
+
                     <a href="#" class="social-btn youtube" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
@@ -749,7 +832,7 @@
                     // === กรณี: ยังไม่เคยเข้า ===
                     // 1. สั่งให้นับเพิ่ม (+1)
                     response = await fetch("https://api.counterapi.dev/v1/visited_subpradu_homepage/homepage/up");
-                    
+
                     // 2. ฝากตราประทับไว้ในเครื่องเขา ว่า "นับไปแล้วนะ"
                     localStorage.setItem(STORAGE_KEY, 'true');
                 } else {
@@ -774,6 +857,32 @@
             if (typeof fetchHomeNews === 'function') fetchHomeNews();
             countVisits();
         };
+
+        // ============================================
+        // ระบบ Hamburger Menu สำหรับมือถือ
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.getElementById('hamburger-icon');
+            const menuBar = document.querySelector('.menu-bar');
+
+            if (hamburger && menuBar) {
+                hamburger.addEventListener('click', function () {
+                    // เปิด-ปิดเมนู
+                    menuBar.classList.toggle('active');
+
+                    // สลับไอคอนระหว่าง 3 ขีด (fa-bars) กับ กากบาท (fa-xmark)
+                    const icon = hamburger.querySelector('i');
+                    if (menuBar.classList.contains('active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-xmark');
+                    } else {
+                        icon.classList.remove('fa-xmark');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            }
+        });
     </script>
 </body>
+
 </html>
