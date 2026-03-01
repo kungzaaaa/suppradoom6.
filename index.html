@@ -7,7 +7,8 @@
   <title>หมู่บ้านซับประดู่</title>
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link rel="icon" type="image/x-icon" sizes="16x16" href="logo/logotitle.png"/>  <style>
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="logo/logotitle.png" />
+  <style>
     /* ========================================= */
     /* [แก้ไขใหม่] แอนิเมชันปุ่มสลับโหมด สไตล์นุ่มนวลเป็นธรรมชาติ (แก้ไขความสมูท 100%) */
     /* ========================================= */
@@ -71,7 +72,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #1c1918;
+      color: #4d3328;
       padding: 8px 0;
       position: relative;
     }
@@ -116,8 +117,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 15px;
-      /* <--- [แก้ไข] เพิ่มการห่อหุ้ม text เพื่อไม่ให้ล้นจอในมือถือ */
+      gap: 6px;
       text-align: center;
       flex-wrap: wrap;
     }
@@ -134,7 +134,7 @@
       background: #ffaf36;
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 5px;
       padding: 12px 40px;
       width: fit-content;
       border-radius: 50px;
@@ -458,135 +458,190 @@
         }
       }
 
-/* ========================================= */
-    /* [แก้ไขใหม่ล่าสุด] ระบบเมนูมือถือ Slide Down นุ่มนวล + รวมปุ่มเปลี่ยนธีมไว้ด้านใน */
-    /* ========================================= */
-    @media (max-width: 768px) {
-      /* 1. จัดระเบียบ Top Bar ให้ความสูงคงที่ ไม่กระตุก */
-      .topbar {
-        justify-content: center !important;
-        min-height: 65px !important;
-      }
-      .logo {
-        padding: 0 !important;
-        margin: 0 auto !important;
-      }
-      .logo img {
-        height: 65px !important; 
-      }
-      .hamburger-menu {
-        display: flex !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-        right: 20px !important;
-        margin: 0 !important;
-      }
+      /* ระบบเมนูมือถือ Slide Down นุ่มนวล + รวมปุ่มเปลี่ยนธีมไว้ด้านใน */
+      @media (max-width: 768px) {
+        .topbar {
+          justify-content: center !important;
+          min-height: 65px !important;
+        }
 
-      /* 2. เปลี่ยนให้กล่องคลุม (.nav-wrapper) เป็นตัวสไลด์ลงมาแทน (จะได้รวมปุ่มโหมดมืดลงมาด้วย) */
-      .nav-wrapper {
-        position: absolute !important;
-        top: 100% !important;
-        left: 0 !important;
-        width: 100% !important;
-        flex-direction: column;
-        background: #ffaf36; /* สีส้ม */
-        padding: 10px 0 25px 0 !important;
-        border-radius: 0 0 25px 25px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        
-        /* แอนิเมชันความสมูท 100% ใช้ opacity + transform แทน max-height */
-        visibility: hidden;
-        opacity: 0;
-        transform: translateY(-20px);
-        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-        z-index: 999;
-        gap: 0 !important;
-      }
+        .logo {
+          padding: 0 !important;
+          margin: 0 auto !important;
+        }
 
-      /* เมื่อกดปุ่ม 3 ขีด กล่องจะสไลด์ลงมา */
-      .nav-wrapper.active {
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
-      }
+        .logo img {
+          height: 65px !important;
+        }
 
-      /* 3. ล้างค่า .menu-bar ให้โปร่งใส กลมกลืนไปกับ Dropdown */
-      .menu-bar {
-        position: static !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        flex-direction: column;
-        width: 100%;
-        padding: 0 !important;
-        border: none !important;
-      }
+        .hamburger-menu {
+          display: flex !important;
+          top: 50% !important;
+          transform: translateY(-50%) !important;
+          right: 20px !important;
+          margin: 0 !important;
+        }
 
-      /* 4. จัดเรียงปุ่มลิงก์เมนู */
-      .menu-bar a {
-        margin: 0;
-        padding: 16px 30px;
-        border-radius: 0;
-        justify-content: flex-start;
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        width: 100%;
-        box-sizing: border-box;
-      }
-      .menu-bar a:last-child {
-        border-bottom: none;
-      }
-      .menu-bar a:hover {
-        background: rgba(255, 255, 255, 0.15);
-        transform: none;
-      }
-      .menu-bar a::before {
-        display: none !important; /* ปิดลูกศรในมือถือ */
-      }
+        /* 2. เปลี่ยนให้กล่องคลุม (.nav-wrapper) เป็นตัวสไลด์ลงมาแทน (จะได้รวมปุ่มโหมดมืดลงมาด้วย) */
+        .nav-wrapper {
+          position: absolute !important;
+          top: 100% !important;
+          left: 0 !important;
+          width: 100% !important;
+          flex-direction: column;
+          background: #ffaf36;
+          /* สีส้ม */
+          padding: 10px 0 25px 0 !important;
+          border-radius: 0 0 25px 25px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 
-      /* 5. แปลงร่างปุ่มเปลี่ยนโหมด เป็นปุ่มกว้างๆ ต่อท้ายเมนู */
-      .theme-toggle-btn {
-        position: static !important;
-        transform: none !important;
-        width: 85% !important;
-        height: 50px !important;
-        margin: 15px auto 0 auto !important;
-        border-radius: 50px !important;
-        background-color: rgba(255, 255, 255, 0.25) !important;
-        color: #ffffff !important;
-        box-shadow: none !important;
-        justify-content: center !important;
-        gap: 12px;
-      }
-      
-      /* ใส่ข้อความให้ปุ่มรู้ว่าใช้ทำอะไร */
-      .theme-toggle-btn::after {
-        content: "สลับโหมด (มืด/สว่าง)";
-        font-family: 'Prompt', sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-      }
-      .theme-toggle-btn:hover {
-        background-color: rgba(255, 255, 255, 0.4) !important;
-        transform: scale(0.96) !important; /* ยุบตัวเวลากด */
-      }
+          /* แอนิเมชันความสมูท 100% ใช้ opacity + transform แทน max-height */
+          visibility: hidden;
+          opacity: 0;
+          transform: translateY(-20px);
+          transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+          z-index: 999;
+          gap: 0 !important;
+        }
 
-      /* จัดเรียงส่วนอื่นๆ ในหน้ามือถือ */
-      .about-content { flex-direction: column; gap: 30px; text-align: center; }
-      .about-text h2::after { margin: 10px auto; }
-      .stats-row { flex-direction: column; gap: 30px; text-align: center; }
-      .project-section { padding: 40px 20px; }
-      
-      /* โหมดมืดสำหรับ Dropdown มือถือ */
-      body.dark-mode .nav-wrapper {
-        background-color: #000000 !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        /* เมื่อกดปุ่ม 3 ขีด กล่องจะสไลด์ลงมา */
+        .nav-wrapper.active {
+          visibility: visible;
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* 3. ล้างค่า .menu-bar ให้โปร่งใส กลมกลืนไปกับ Dropdown */
+        .menu-bar {
+          position: static !important;
+          background: transparent !important;
+          box-shadow: none !important;
+          flex-direction: column;
+          width: 90%;
+          padding: 0 !important;
+          border: none !important;
+        }
+
+        /* 4. จัดเรียงปุ่มลิงก์เมนู (มีลูกศร Hover สมูทๆ บนมือถือ) */
+        .menu-bar a {
+          margin: 0;
+          padding: 16px 30px;
+          /* ระยะขอบซ้ายเดิมคือ 30px */
+          border-radius: 0;
+          justify-content: flex-start;
+          background: transparent;
+          border: none;
+          border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+          width: 100%;
+          box-sizing: border-box;
+          transition: all 0.3s ease;
+          /* เพิ่มความสมูทตอนเอานิ้วแตะ/ยกออก */
+        }
+
+        .menu-bar a:last-child {
+          border-bottom: none;
+        }
+
+        /* สร้างลูกศรเตรียมไว้ แต่ซ่อนและหดพื้นที่ให้เป็น 0 (กันข้อความกระตุก) */
+        .menu-bar a::before {
+          content: '\f0da';
+          /* ไอคอนลูกศรสามเหลี่ยม (Font Awesome) */
+          font-family: 'Font Awesome 6 Free';
+          font-weight: 900;
+          font-size: 14px;
+          display: inline-block !important;
+          /* เปิดใช้งานลูกศร */
+          opacity: 0;
+          /* โปร่งใส */
+          width: 0;
+          /* หดความกว้าง */
+          margin-right: 0;
+          transform: translateX(-15px);
+          /* ถอยไปซ่อนทางซ้าย */
+          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* แอคชันเวลาเอานิ้วสัมผัส (Active) หรือเมาส์ชี้ (Hover) */
+        .menu-bar a:hover,
+        .menu-bar a:active {
+          background: rgba(255, 255, 255, 0.15);
+          padding-left: 24px;
+          /* ทริค! หดระยะขอบซ้ายลงนิดนึง เพื่อเปิดทางให้ลูกศร */
+        }
+
+        /* สั่งให้ลูกศรโผล่มา และห่างจากไอคอนคำ 3px ตามที่ต้องการ */
+        .menu-bar a:hover::before,
+        .menu-bar a:active::before {
+          opacity: 1;
+          width: 12px;
+          /* ขยายพื้นที่ให้ตัวลูกศร */
+          margin-right: 3px;
+          /* เว้นระยะห่างหน้าคำ 3px เป๊ะๆ */
+          transform: translateX(0);
+          /* สไลด์เข้าที่ */
+        }
+
+        /* 5. แปลงร่างปุ่มเปลี่ยนโหมด เป็นปุ่มกว้างๆ ต่อท้ายเมนู */
+        .theme-toggle-btn {
+          position: static !important;
+          transform: none !important;
+          width: 85% !important;
+          height: 50px !important;
+          margin: 15px auto 0 auto !important;
+          border-radius: 50px !important;
+          background-color: rgba(255, 255, 255, 0.25) !important;
+          color: #ffffff !important;
+          box-shadow: none !important;
+          justify-content: center !important;
+          gap: 12px;
+        }
+
+        /* ใส่ข้อความให้ปุ่มรู้ว่าใช้ทำอะไร */
+        .theme-toggle-btn::after {
+          content: "สลับโหมด (มืด/สว่าง)";
+          font-family: 'Prompt', sans-serif;
+          font-size: 16px;
+          font-weight: 500;
+        }
+
+        .theme-toggle-btn:hover {
+          background-color: rgba(255, 255, 255, 0.4) !important;
+          transform: scale(0.96) !important;
+          /* ยุบตัวเวลากด */
+        }
+
+        /* จัดเรียงส่วนอื่นๆ ในหน้ามือถือ */
+        .about-content {
+          flex-direction: column;
+          gap: 30px;
+          text-align: center;
+        }
+
+        .about-text h2::after {
+          margin: 10px auto;
+        }
+
+        .stats-row {
+          flex-direction: column;
+          gap: 30px;
+          text-align: center;
+        }
+
+        .project-section {
+          padding: 40px 20px;
+        }
+
+        /* โหมดมืดสำหรับ Dropdown มือถือ */
+        body.dark-mode .nav-wrapper {
+          background-color: #000000 !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark-mode .theme-toggle-btn {
+          background-color: rgba(255, 255, 255, 0.1) !important;
+          color: #ffaf36 !important;
+        }
       }
-      body.dark-mode .theme-toggle-btn {
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        color: #ffaf36 !important;
-      }
-    }
     }
 
     /* ========================================= */
@@ -904,8 +959,6 @@
     body.dark-mode .menu-bar {
       background-color: #000000 !important;
       /* เปลี่ยนพื้นหลังเมนูเป็นสีดำ */
-      border: 1px solid rgba(255, 255, 255, 0.2) !important;
-      /* เพิ่มเส้นขอบสีขาวจางๆ ให้กล่องดูมีมิติ ไม่จมไปกับพื้นหลัง */
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5) !important;
       /* ปรับเงาให้เข้มขึ้นสำหรับพื้นหลังสีดำ */
     }
@@ -959,8 +1012,8 @@
   <div class="fixed-header">
     <div class="topbar">
       <div class="logo">
-        <img src="logo/logo.png" alt="โลโก้หมู่บ้านซับประดู่" />
         หมู่บ้านซับประดู่
+      <img src="logo/logo.png" alt="โลโก้หมู่บ้านซับประดู่" />
       </div>
 
       <div class="hamburger-menu" id="hamburger-icon">
@@ -1100,10 +1153,10 @@
         return charsToReplace[tag] || tag;
       });
     }
-   // ============================================
+    // ============================================
     // การตั้งค่า API (ใช้ URL จาก Apps Script)
     // ============================================
-    const API_URL = "https://script.google.com/macros/s/AKfycbxIflamsQfoHzh0zq2uMSF6_W9oqylamXDFVkE74y-akA29ICo0mwCA52ktZ-kjo7NSwg/exec"; 
+    const API_URL = "https://script.google.com/macros/s/AKfycbxIflamsQfoHzh0zq2uMSF6_W9oqylamXDFVkE74y-akA29ICo0mwCA52ktZ-kjo7NSwg/exec";
     const API_KEY = "SuppradooSecret_2024";
 
     async function fetchHomeNews() {
@@ -1259,17 +1312,17 @@
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         const targetId = this.getAttribute('href');
-        
+
         // ข้ามการทำงานนี้ ถ้าเป็นลิงก์ # เฉยๆ หรือลิงก์กลับขึ้นบนสุดที่เรามีโค้ดแยกไว้แล้ว
-        if (targetId === '#' || targetId === '#top-page') return; 
+        if (targetId === '#' || targetId === '#top-page') return;
 
         const targetElement = document.querySelector(targetId);
-        
+
         if (targetElement) {
           e.preventDefault(); // สั่งยกเลิกพฤติกรรมปกติ (เพื่อไม่ให้ URL เปลี่ยนเป็น #)
 
           // 1. คำนวณระยะเลื่อน โดยหักระยะเผื่อความสูงของแถบเมนูด้านบน (ประมาณ 100px)
-          const headerOffset = 100; 
+          const headerOffset = 100;
           const elementPosition = targetElement.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
